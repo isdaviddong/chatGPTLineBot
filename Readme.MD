@@ -1,5 +1,7 @@
 ChatGP LINE Bot
 ===
+最近幾天紅到不行的人工智能對談範例 chatGPT (https://chat.openai.com/chat), 其實是透過 openAPI 服務來實作的一個範例。因此，只要申請 openAPI key ，人人都可以建立一個 AI 智能對談服務...
+
 1. 於底下位置申請 openAPI key:
 https://beta.openai.com/account/api-keys
 
