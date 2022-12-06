@@ -13,3 +13,5 @@ https://beta.openai.com/account/api-keys
 執行結果:  
 ![](https://i.imgur.com/v6Shjgk.png)
 
+### OpenAI參考文件:  
+https://beta.openai.com/docs/api-reference/completions/create
