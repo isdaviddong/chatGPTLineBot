@@ -15,18 +15,16 @@ namespace isRock.Template
         public static Result CallChatGPT(string msg)
         {
             HttpClient client = new HttpClient();
-            string uri = "https://api.openai.com/v1/completions";
+            string uri = "https://api.openai.com/v1/chat/completions";
 
             // Request headers.
             client.DefaultRequestHeaders.Add(
-                "Authorization", "Bearer ________chatGPT_Token_______________");
+                "Authorization", "Bearer _______openai_________key_________");
 
             var JsonString = @"
             {
-  ""model"": ""text-davinci-003"",
-  ""prompt"": ""question"",
-  ""max_tokens"": 4000,
-  ""temperature"": 0
+  ""model"": ""gpt-3.5-turbo"",
+  ""messages"": [{""role"": ""user"", ""content"":""question"" }]
 }
             ".Replace("question", msg);
             var content = new StringContent(JsonString, Encoding.UTF8, "application/json");
@@ -39,10 +37,15 @@ namespace isRock.Template
     // Root myDeserializedClass = JsonConvert.DeserializeObject<Root>(myJsonResponse);
     public class Choice
     {
-        public string text { get; set; }
         public int index { get; set; }
-        public object logprobs { get; set; }
+        public Message message { get; set; }
         public string finish_reason { get; set; }
+    }
+
+    public class Message
+    {
+        public string role { get; set; }
+        public string content { get; set; }
     }
 
     public class Result
@@ -50,7 +53,6 @@ namespace isRock.Template
         public string id { get; set; }
         public string @object { get; set; }
         public int created { get; set; }
-        public string model { get; set; }
         public List<Choice> choices { get; set; }
         public Usage usage { get; set; }
     }

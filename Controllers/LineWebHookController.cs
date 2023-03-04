@@ -13,12 +13,12 @@ namespace isRock.Template
         [HttpPost]
         public IActionResult POST()
         {
-            var AdminUserId = "__________Line_Admin_User_ID________________";
+            var AdminUserId = "___________your___________admin___________user___________id___________";
 
             try
             {
                 //設定ChannelAccessToken
-                this.ChannelAccessToken = "______________Line_Channel_Access_Token______________";
+                this.ChannelAccessToken = "___________your___________channel___________access___________token___________";
                 //配合Line Verify
                 if (ReceivedMessage.events == null || ReceivedMessage.events.Count() <= 0 ||
                     ReceivedMessage.events.FirstOrDefault().replyToken == "00000000000000000000000000000000") return Ok();
@@ -27,7 +27,10 @@ namespace isRock.Template
                 var responseMsg = "";
                 //準備回覆訊息
                 if (LineEvent.type.ToLower() == "message" && LineEvent.message.type == "text")
-                    responseMsg = $"{  isRock.Template.ChatGPT.CallChatGPT(LineEvent.message.text).choices.FirstOrDefault().text}";
+                {
+                    var GptResult=isRock.Template.ChatGPT.CallChatGPT(LineEvent.message.text).choices[0].message.content;
+                    responseMsg = $"{GptResult}";
+                }
                 else if (LineEvent.type.ToLower() == "message")
                     responseMsg = $"收到 event : {LineEvent.type} type: {LineEvent.message.type} ";
                 else
